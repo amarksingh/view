@@ -3,7 +3,7 @@ class PUG {
     constructor(options = {}) {
         this.$options = options
     }
-    render(content, data = {}) {
+    render(content, data = {},cb) {
         cb(pug.compile(content, this.$options)(data))
     }
 
