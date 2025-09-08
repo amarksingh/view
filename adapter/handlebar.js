@@ -3,7 +3,7 @@ class Handlebar {
     constructor(options = {}) {
         this.$options = options
     }
-    render(content, data = {}) {
+    render(content, data = {},cb) {
         cb(handlebars.compile(content)(data))
     }
 
