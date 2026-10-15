@@ -19,7 +19,7 @@ class ViewManager extends Manager {
      * @param {any} name
      * @returns {any}
      */
-    engine(name = null) {
+    engine(name: any = null) {
         return this.driver(name)
     }
 
@@ -29,7 +29,7 @@ class ViewManager extends Manager {
      * @param {any} name
      * @returns {any}
      */
-    resolve($name) {
+    resolve($name: string) {
         var config = this.getConfig($name);
         if (!config) {
             throw new InvalidArgumentException("Engine [{" + $name + "}] was not available.");
@@ -49,7 +49,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    createTwigDriver($config) {
+    createTwigDriver($config: Record<string, any>) {
         return this.adapt(new(require('./adapter/twig'))($config['options']), $config);
     }
 
@@ -59,7 +59,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    createEjsDriver($config) {
+    createEjsDriver($config: Record<string, any>) {
         return this.adapt(new(require('./adapter/ejs'))($config['options']), $config);
     }
 
@@ -69,7 +69,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    createPugDriver($config) {
+    createPugDriver($config: Record<string, any>) {
         return this.adapt(new(require('./adapter/pug'))($config['options']), $config);
     }
 
@@ -79,7 +79,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    createNunjucksDriver($config) {
+    createNunjucksDriver($config: Record<string, any>) {
         return this.adapt(new(require('./adapter/nunjucks'))($config['options']), $config);
     }
 
@@ -89,7 +89,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    createHandlebarDriver($config) {
+    createHandlebarDriver($config: Record<string, any>) {
         return this.adapt(new(require('./adapter/handlebar'))($config['options']), $config);
     }
 
@@ -100,7 +100,7 @@ class ViewManager extends Manager {
      * @param {any} config
      * @returns {any}
      */
-    adapt(adapter, config) {
+    adapt(adapter: any, config: Record<string, any>) {
         return new ViewAdapter(adapter, config);
     }
 
@@ -110,7 +110,7 @@ class ViewManager extends Manager {
      * @param {any} name
      * @returns {any}
      */
-    getConfig(name) {
+    getConfig(name: string) {
         return super.getConfig(`engines.${name}`);
     }
 

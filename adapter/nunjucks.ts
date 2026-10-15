@@ -6,7 +6,7 @@ class Handlebar {
      * @param {any} options
      * @returns {any}
      */
-    constructor(options = {}) {
+    constructor(options: Record<string, any> = {}) {
         this.default = {
             noCache: !options['cache'],
             web: {
@@ -28,7 +28,7 @@ class Handlebar {
      * @param {any} cb
      * @returns {any}
      */
-    render(content, data = {}, cb) {
+    render(content: any, data: Record<string, any> = {}, cb: any) {
         return nunjucks.renderString(content, data, function(err, res) {
             if (err) return cb(err)
             cb(res)

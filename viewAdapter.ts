@@ -13,7 +13,7 @@ class ViewAdapter {
      * @param {any} config
      * @returns {any}
      */
-    constructor($adapter, config) {
+    constructor($adapter: any, config: Record<string, any>) {
         this[kAdapter] = $adapter;
         this[kConfig] = config;
         this[kCache] = Object.create(null)
@@ -26,7 +26,7 @@ class ViewAdapter {
      * @param {any} cb
      * @returns {any}
      */
-    renderFile(file, data, cb) {
+    renderFile(file: any, data: Record<string, any>, cb: any) {
 
         this.readFile(this.applyPathPrefix(file), (err, content) => {
             if (err) return cb(err)
@@ -44,7 +44,7 @@ class ViewAdapter {
      * @param {any} cb
      * @returns {any}
      */
-    readFile(filename, cb) {
+    readFile(filename: any, cb: any) {
         if (this.getConfig('cache')) {
             if (this[kCache][filename]) {
                 return cb(null, this[kCache][filename])
@@ -64,7 +64,7 @@ class ViewAdapter {
      * @param {any} name
      * @returns {any}
      */
-    getConfig(name) {
+    getConfig(name: string) {
         return ObjectGet(this[kConfig], name, null)
     }
 
@@ -83,7 +83,7 @@ class ViewAdapter {
      * @param {any} dest
      * @returns {any}
      */
-    applyPathPrefix(dest = '') {
+    applyPathPrefix(dest: string = '') {
         return this.applyExtension(path.join(this.getRootPath(), dest.replace(/\./g, '/')))
     }
 
@@ -93,7 +93,7 @@ class ViewAdapter {
      * @param {any} path
      * @returns {any}
      */
-    applyExtension(path = '') {
+    applyExtension(path: string = '') {
         return path + '.' + (this.getConfig('extension') || this.getConfig('engine'))
     }
 

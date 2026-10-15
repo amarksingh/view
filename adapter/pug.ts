@@ -6,7 +6,7 @@ class PUG {
      * @param {any} options
      * @returns {any}
      */
-    constructor(options = {}) {
+    constructor(options: Record<string, any> = {}) {
         this.$options = options
     }
     /**
@@ -17,7 +17,7 @@ class PUG {
      * @param {any} cb
      * @returns {any}
      */
-    render(content, data = {},cb) {
+    render(content: any, data: Record<string, any> = {}, cb: any) {
         cb(pug.compile(content, this.$options)(data))
     }
 

@@ -6,7 +6,7 @@ class FileNotFoundException extends FileNotFoundExceptionContracts {
      * @param {any} errors
      * @returns {any}
      */
-    constructor(errors) {
+    constructor(errors: any) {
         super();
         this.name = this.constructor.name;
         this.message = 'View file not found';

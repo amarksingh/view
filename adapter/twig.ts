@@ -6,7 +6,7 @@ class Twig {
      * @param {any} options
      * @returns {any}
      */
-    constructor(options = {}) {
+    constructor(options: Record<string, any> = {}) {
         this.$options = options;
         this.$options.base = options.path;
         twig.cache(this.$options['cache'])
@@ -20,7 +20,7 @@ class Twig {
      * @param {any} cb
      * @returns {any}
      */
-    render(string, data = {}, cb) {
+    render(string: any, data: Record<string, any> = {}, cb: any) {
         twig.twig({ data: string, ...this.$options }).renderAsync(data).then(function(res) {
             cb(res)
         }, cb)
