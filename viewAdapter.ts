@@ -6,11 +6,26 @@ const kConfig = Symbol('config')
 const kCache = Symbol('cache')
 const fs = require('fs')
 class ViewAdapter {
+    /**
+     * constructor method.
+     *
+     * @param {any} adapter
+     * @param {any} config
+     * @returns {any}
+     */
     constructor($adapter, config) {
         this[kAdapter] = $adapter;
         this[kConfig] = config;
         this[kCache] = Object.create(null)
     }
+    /**
+     * renderFile method.
+     *
+     * @param {any} file
+     * @param {any} data
+     * @param {any} cb
+     * @returns {any}
+     */
     renderFile(file, data, cb) {
 
         this.readFile(this.applyPathPrefix(file), (err, content) => {
@@ -22,6 +37,13 @@ class ViewAdapter {
             }
         })
     }
+    /**
+     * readFile method.
+     *
+     * @param {any} filename
+     * @param {any} cb
+     * @returns {any}
+     */
     readFile(filename, cb) {
         if (this.getConfig('cache')) {
             if (this[kCache][filename]) {
@@ -36,18 +58,41 @@ class ViewAdapter {
             cb(err, data)
         })
     }
+    /**
+     * getConfig method.
+     *
+     * @param {any} name
+     * @returns {any}
+     */
     getConfig(name) {
         return ObjectGet(this[kConfig], name, null)
     }
 
+    /**
+     * getRootPath method.
+     *
+     * @returns {any}
+     */
     getRootPath() {
         return this[kConfig]['root'] || ''
     }
 
+    /**
+     * applyPathPrefix method.
+     *
+     * @param {any} dest
+     * @returns {any}
+     */
     applyPathPrefix(dest = '') {
         return this.applyExtension(path.join(this.getRootPath(), dest.replace(/\./g, '/')))
     }
 
+    /**
+     * applyExtension method.
+     *
+     * @param {any} path
+     * @returns {any}
+     */
     applyExtension(path = '') {
         return path + '.' + (this.getConfig('extension') || this.getConfig('engine'))
     }

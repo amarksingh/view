@@ -1,5 +1,11 @@
 const FileNotFoundExceptionContracts = require('@ostro/contracts/view/fileNotFoundException')
 class FileNotFoundException extends FileNotFoundExceptionContracts {
+    /**
+     * constructor method.
+     *
+     * @param {any} errors
+     * @returns {any}
+     */
     constructor(errors) {
         super();
         this.name = this.constructor.name;

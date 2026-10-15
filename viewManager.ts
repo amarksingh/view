@@ -7,12 +7,28 @@ const Manager = require('@ostro/support/manager')
 
 class ViewManager extends Manager {
 
+    /**
+     * $type property.
+     * @type {any}
+     */
     $type = 'view';
 
+    /**
+     * engine method.
+     *
+     * @param {any} name
+     * @returns {any}
+     */
     engine(name = null) {
         return this.driver(name)
     }
 
+    /**
+     * resolve method.
+     *
+     * @param {any} name
+     * @returns {any}
+     */
     resolve($name) {
         var config = this.getConfig($name);
         if (!config) {
@@ -27,38 +43,91 @@ class ViewManager extends Manager {
     }
 
 
+    /**
+     * createTwigDriver method.
+     *
+     * @param {any} config
+     * @returns {any}
+     */
     createTwigDriver($config) {
         return this.adapt(new(require('./adapter/twig'))($config['options']), $config);
     }
 
+    /**
+     * createEjsDriver method.
+     *
+     * @param {any} config
+     * @returns {any}
+     */
     createEjsDriver($config) {
         return this.adapt(new(require('./adapter/ejs'))($config['options']), $config);
     }
 
+    /**
+     * createPugDriver method.
+     *
+     * @param {any} config
+     * @returns {any}
+     */
     createPugDriver($config) {
         return this.adapt(new(require('./adapter/pug'))($config['options']), $config);
     }
 
+    /**
+     * createNunjucksDriver method.
+     *
+     * @param {any} config
+     * @returns {any}
+     */
     createNunjucksDriver($config) {
         return this.adapt(new(require('./adapter/nunjucks'))($config['options']), $config);
     }
 
+    /**
+     * createHandlebarDriver method.
+     *
+     * @param {any} config
+     * @returns {any}
+     */
     createHandlebarDriver($config) {
         return this.adapt(new(require('./adapter/handlebar'))($config['options']), $config);
     }
 
+    /**
+     * adapt method.
+     *
+     * @param {any} adapter
+     * @param {any} config
+     * @returns {any}
+     */
     adapt(adapter, config) {
         return new ViewAdapter(adapter, config);
     }
 
+    /**
+     * getConfig method.
+     *
+     * @param {any} name
+     * @returns {any}
+     */
     getConfig(name) {
         return super.getConfig(`engines.${name}`);
     }
 
+    /**
+     * getDefaultDriver method.
+     *
+     * @returns {any}
+     */
     getDefaultDriver() {
         return this.getDefaultEngine();
     }
 
+    /**
+     * getDefaultEngine method.
+     *
+     * @returns {any}
+     */
     getDefaultEngine() {
         return super.getConfig('default');
     }
