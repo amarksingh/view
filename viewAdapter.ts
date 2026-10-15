@@ -6,17 +6,21 @@ const kConfig = Symbol('config')
 const kCache = Symbol('cache')
 const fs = require('fs')
 class ViewAdapter {
+    [kAdapter]: any;
+    [kConfig]: Record<string, any>;
+    [kCache]: Record<string, string>;
+
     /**
      * constructor method.
      *
      * @param {any} adapter
-     * @param {any} config
-     * @returns {any}
+     * @param {Record<string, any>} config
+     * @returns {void}
      */
     constructor($adapter: any, config: Record<string, any>) {
         this[kAdapter] = $adapter;
         this[kConfig] = config;
-        this[kCache] = Object.create(null)
+        this[kCache] = Object.create(null);
     }
     /**
      * renderFile method.
