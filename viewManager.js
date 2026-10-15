@@ -22,6 +22,7 @@ class ViewManager extends Manager {
             config['options'] = {}
         }
         config['options']['path'] = config['root']
+        config['driver'] = config['driver'] || $name;
         return super.resolve($name, config)
     }
 
@@ -52,6 +53,10 @@ class ViewManager extends Manager {
 
     getConfig(name) {
         return super.getConfig(`engines.${name}`);
+    }
+
+    getDefaultDriver() {
+        return this.getDefaultEngine();
     }
 
     getDefaultEngine() {
