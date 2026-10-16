@@ -1,3 +1,9 @@
+jest.mock('ejs', () => ({ render: jest.fn() }), { virtual: true });
+jest.mock('handlebars', () => ({ compile: jest.fn() }), { virtual: true });
+jest.mock('nunjucks', () => ({ configure: jest.fn(), renderString: jest.fn() }), { virtual: true });
+jest.mock('pug', () => ({ compile: jest.fn() }), { virtual: true });
+jest.mock('twig', () => ({ cache: jest.fn(), twig: jest.fn() }), { virtual: true });
+
 import FileNotFoundException from '../FileNotFoundException';
 import InvalidArgumentException from '../InvalidArgumentException';
 import ViewServiceProvider from '../viewServiceProvider';

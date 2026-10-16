@@ -1,4 +1,4 @@
-const pug = require('pug')
+import pug from 'pug'
 class PUG {
     /**
      * constructor method.
@@ -22,4 +22,4 @@ class PUG {
     }
 
 }
-module.exports = PUG
+export default PUG;

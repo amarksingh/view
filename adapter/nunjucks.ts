@@ -1,4 +1,4 @@
-const nunjucks = require('nunjucks')
+import nunjucks from 'nunjucks'
 class Handlebar {
     /**
      * constructor method.
@@ -36,4 +36,4 @@ class Handlebar {
     }
 
 }
-module.exports = Handlebar
+export default Handlebar;

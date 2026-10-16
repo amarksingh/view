@@ -21,4 +21,4 @@ class FileNotFoundException extends FileNotFoundExceptionContracts {
     }
 }
 
-export = FileNotFoundException;
+export default FileNotFoundException;

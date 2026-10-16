@@ -1,4 +1,4 @@
-const twig = require('twig')
+import twig from 'twig'
 class Twig {
     /**
      * constructor method.
@@ -27,4 +27,4 @@ class Twig {
     }
 
 }
-module.exports = Twig
+export default Twig;

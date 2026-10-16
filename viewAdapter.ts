@@ -102,4 +102,4 @@ class ViewAdapter {
 
 }
 
-export = ViewAdapter;
+export default ViewAdapter;

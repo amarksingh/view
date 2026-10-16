@@ -1,4 +1,4 @@
-const handlebars = require('handlebars')
+import handlebars from 'handlebars'
 class Handlebar {
     /**
      * constructor method.
@@ -22,4 +22,4 @@ class Handlebar {
     }
 
 }
-module.exports = Handlebar
+export default Handlebar;

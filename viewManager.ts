@@ -135,4 +135,4 @@ class ViewManager extends Manager {
 
 }
 
-export = ViewManager;
+export default ViewManager;

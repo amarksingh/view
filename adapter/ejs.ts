@@ -1,4 +1,4 @@
-const ejs = require('ejs')
+import ejs from 'ejs'
 class EJS {
     /**
      * constructor method.
@@ -22,4 +22,4 @@ class EJS {
     }
 
 }
-module.exports = EJS
+export default EJS;

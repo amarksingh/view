@@ -19,4 +19,4 @@ class ViewServiceProvider extends ServiceProvider {
 
 }
 
-export = ViewServiceProvider;
+export default ViewServiceProvider;

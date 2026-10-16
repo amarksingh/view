@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
-const ViewAdapter = require('../viewAdapter');
+const _ViewAdapter = require('../viewAdapter');
+const ViewAdapter = _ViewAdapter.default || _ViewAdapter;
 
 describe('ViewAdapter', () => {
     const tmpDir = path.join(__dirname, 'fixtures');
