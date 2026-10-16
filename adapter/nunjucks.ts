@@ -1,4 +1,3 @@
-import nunjucks from 'nunjucks'
 class Handlebar {
     /**
      * constructor method.
@@ -18,6 +17,8 @@ class Handlebar {
         this.default = { ...this.default,
             ...options
         }
+        const nunjucksModule = require('nunjucks');
+        const nunjucks = nunjucksModule?.default || nunjucksModule;
         nunjucks.configure(this.default.path, this.default);
     }
     /**
@@ -29,6 +30,8 @@ class Handlebar {
      * @returns {any}
      */
     render(content: any, data: Record<string, any> = {}, cb: any) {
+        const nunjucksModule = require('nunjucks');
+        const nunjucks = nunjucksModule?.default || nunjucksModule;
         return nunjucks.renderString(content, data, function(err, res) {
             if (err) return cb(err)
             cb(res)

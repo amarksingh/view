@@ -1,4 +1,3 @@
-import handlebars from 'handlebars'
 class Handlebar {
     /**
      * constructor method.
@@ -18,6 +17,8 @@ class Handlebar {
      * @returns {any}
      */
     render(content: any, data: Record<string, any> = {}, cb: any) {
+        const hbModule = require('handlebars');
+        const handlebars = hbModule?.default || hbModule;
         cb(handlebars.compile(content)(data))
     }
 

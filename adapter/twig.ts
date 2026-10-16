@@ -1,4 +1,3 @@
-import twig from 'twig'
 class Twig {
     /**
      * constructor method.
@@ -9,6 +8,8 @@ class Twig {
     constructor(options: Record<string, any> = {}) {
         this.$options = options;
         this.$options.base = options.path;
+        const twigModule = require('twig');
+        const twig = twigModule?.default || twigModule;
         twig.cache(this.$options['cache'])
 
     }
@@ -21,6 +22,8 @@ class Twig {
      * @returns {any}
      */
     render(string: any, data: Record<string, any> = {}, cb: any) {
+        const twigModule = require('twig');
+        const twig = twigModule?.default || twigModule;
         twig.twig({ data: string, ...this.$options }).renderAsync(data).then(function(res) {
             cb(res)
         }, cb)
