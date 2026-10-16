@@ -1,4 +1,3 @@
-import ejs from 'ejs'
 class EJS {
     /**
      * constructor method.
@@ -18,6 +17,8 @@ class EJS {
      * @returns {any}
      */
     render(content: any, data: Record<string, any> = {}, cb: any) {
+        const ejsModule = require('ejs');
+        const ejs = ejsModule?.default || ejsModule;
         cb(ejs.render(content, data, this.$options))
     }
 
