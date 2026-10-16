@@ -6,7 +6,6 @@ module.exports = {
         "**/test/**/*.test.ts",
         "**/test/**/*.test.js"
     ],
-    "verbose": true,
     "transform": {
         "^.+\\.ts$": [
             tsJestPath,
@@ -14,5 +13,25 @@ module.exports = {
                 "tsconfig": "<rootDir>/tsconfig.json"
             }
         ]
-    }
+    },
+    "moduleNameMapper": {
+        "^@ostro/support/(.*)$": "<rootDir>/../support/$1",
+        "^@ostro/support$": "<rootDir>/../support",
+        "^@ostro/contracts/(.*)$": "<rootDir>/../contracts/$1",
+        "^@ostro/contracts$": "<rootDir>/../contracts"
+    },
+    "collectCoverage": true,
+    "coverageDirectory": "coverage",
+    "coverageReporters": [
+        "text",
+        "lcov",
+        "clover"
+    ],
+    "collectCoverageFrom": [
+        "<rootDir>/**/*.ts",
+        "!<rootDir>/node_modules/**",
+        "!<rootDir>/test/**",
+        "!<rootDir>/coverage/**",
+        "!<rootDir>/jest.config.js"
+    ]
 };

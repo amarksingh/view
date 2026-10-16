@@ -1,10 +1,11 @@
-const path = require('path')
-const ObjectGet = require('lodash.get')
-const FileNotFoundException = require('./FileNotFoundException')
-const kAdapter = Symbol('adapter')
-const kConfig = Symbol('config')
-const kCache = Symbol('cache')
-const fs = require('fs')
+import fs from 'fs';
+import path from 'path';
+import ObjectGet from 'lodash.get';
+
+const kAdapter: unique symbol = Symbol('adapter');
+const kConfig: unique symbol = Symbol('config');
+const kCache: unique symbol = Symbol('cache');
+
 class ViewAdapter {
     [kAdapter]: any;
     [kConfig]: Record<string, any>;
@@ -13,93 +14,92 @@ class ViewAdapter {
     /**
      * constructor method.
      *
-     * @param {any} adapter
-     * @param {Record<string, any>} config
-     * @returns {void}
+     * @param adapter - Engine adapter instance
+     * @param config - Configuration options dictionary
      */
     constructor($adapter: any, config: Record<string, any>) {
         this[kAdapter] = $adapter;
         this[kConfig] = config;
         this[kCache] = Object.create(null);
     }
+
     /**
      * renderFile method.
      *
-     * @param {any} file
-     * @param {any} data
-     * @param {any} cb
-     * @returns {any}
+     * @param file - File path or identifier
+     * @param data - Template data dictionary
+     * @param cb - Callback function
      */
-    renderFile(file: any, data: Record<string, any>, cb: any) {
-
-        this.readFile(this.applyPathPrefix(file), (err, content) => {
-            if (err) return cb(err)
+    renderFile(file: string, data: Record<string, any>, cb: (err: unknown, result?: unknown) => void): void {
+        this.readFile(this.applyPathPrefix(file), (err: unknown, content?: string) => {
+            if (err) return cb(err);
             try {
-                this[kAdapter].render(content, data, cb)
+                this[kAdapter].render(content, data, cb);
             } catch (err) {
-                cb(err)
+                cb(err);
             }
-        })
+        });
     }
+
     /**
      * readFile method.
      *
-     * @param {any} filename
-     * @param {any} cb
-     * @returns {any}
+     * @param filename - Absolute or resolved file path
+     * @param cb - Callback function receiving error or file contents
      */
-    readFile(filename: any, cb: any) {
+    readFile(filename: string, cb: (err: unknown, data?: string) => void): void {
         if (this.getConfig('cache')) {
             if (this[kCache][filename]) {
-                return cb(null, this[kCache][filename])
+                return cb(null, this[kCache][filename]);
             }
         }
-        fs.readFile(filename, 'utf-8', (err, data) => {
+        fs.readFile(filename, 'utf-8', (err: NodeJS.ErrnoException | null, data: string) => {
             if (this.getConfig('cache')) {
-
-                this[kCache][filename] = data
+                this[kCache][filename] = data;
             }
-            cb(err, data)
-        })
+            cb(err, data);
+        });
     }
+
     /**
      * getConfig method.
      *
-     * @param {any} name
-     * @returns {any}
+     * @param name - Configuration key name
+     * @returns Configuration value or null
      */
-    getConfig(name: string) {
-        return ObjectGet(this[kConfig], name, null)
+    getConfig(name: string): any {
+        return ObjectGet(this[kConfig], name, null);
     }
 
     /**
      * getRootPath method.
      *
-     * @returns {any}
+     * @returns Root directory path
      */
-    getRootPath() {
-        return this[kConfig]['root'] || ''
+    getRootPath(): string {
+        return this[kConfig]['root'] || '';
     }
 
     /**
      * applyPathPrefix method.
      *
-     * @param {any} dest
-     * @returns {any}
+     * @param dest - Destination view path
+     * @returns Full resolved path with extension
      */
-    applyPathPrefix(dest: string = '') {
-        return this.applyExtension(path.join(this.getRootPath(), dest.replace(/\./g, '/')))
+    applyPathPrefix(dest: string = ''): string {
+        return this.applyExtension(path.join(this.getRootPath(), dest.replace(/\./g, '/')));
     }
 
     /**
      * applyExtension method.
      *
-     * @param {any} path
-     * @returns {any}
+     * @param path - File path without extension
+     * @returns File path with extension appended
      */
-    applyExtension(path: string = '') {
-        return path + '.' + (this.getConfig('extension') || this.getConfig('engine'))
+    applyExtension(path: string = ''): string {
+        return path + '.' + (this.getConfig('extension') || this.getConfig('engine'));
     }
 
 }
-module.exports = ViewAdapter
+
+export = ViewAdapter;

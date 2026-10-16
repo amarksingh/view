@@ -1,137 +1,138 @@
-require('@ostro/support/helpers')
-const ViewAdapter = require('./viewAdapter')
-const InvalidArgumentException = require('./InvalidArgumentException')
-const ErrorBag = require('@ostro/support/errorBag')
-const Input = require('@ostro/support/input')
-const Manager = require('@ostro/support/manager')
+import '@ostro/support/helpers';
+import Manager from '@ostro/support/manager';
+import InvalidArgumentException from './InvalidArgumentException';
+import ViewAdapter from './viewAdapter';
+import EjsAdapter from './adapter/ejs';
+import HandlebarAdapter from './adapter/handlebar';
+import NunjucksAdapter from './adapter/nunjucks';
+import PugAdapter from './adapter/pug';
+import TwigAdapter from './adapter/twig';
 
 class ViewManager extends Manager {
 
     /**
      * $type property.
-     * @type {any}
      */
-    $type = 'view';
+    $type: string = 'view';
 
     /**
      * engine method.
      *
-     * @param {any} name
-     * @returns {any}
+     * @param name - Engine name or null for default
+     * @returns View adapter instance
      */
-    engine(name: any = null) {
-        return this.driver(name)
+    engine(name: string | null = null): ViewAdapter {
+        return this.driver(name) as ViewAdapter;
     }
 
     /**
      * resolve method.
      *
-     * @param {any} name
-     * @returns {any}
+     * @param name - Engine name to resolve
+     * @returns Resolved driver instance
      */
-    resolve($name: string) {
-        var config = this.getConfig($name);
+    resolve($name: string): any {
+        const config: Record<string, any> = this.getConfig($name);
         if (!config) {
             throw new InvalidArgumentException("Engine [{" + $name + "}] was not available.");
         }
         if (typeof config['options'] != 'object') {
-            config['options'] = {}
+            config['options'] = {};
         }
-        config['options']['path'] = config['root']
+        config['options']['path'] = config['root'];
         config['driver'] = config['driver'] || $name;
-        return super.resolve($name, config)
+        return super.resolve($name, config);
     }
-
 
     /**
      * createTwigDriver method.
      *
-     * @param {any} config
-     * @returns {any}
+     * @param config - Driver configuration
+     * @returns View adapter instance
      */
-    createTwigDriver($config: Record<string, any>) {
-        return this.adapt(new(require('./adapter/twig'))($config['options']), $config);
+    createTwigDriver($config: Record<string, any>): ViewAdapter {
+        return this.adapt(new TwigAdapter($config['options']), $config);
     }
 
     /**
      * createEjsDriver method.
      *
-     * @param {any} config
-     * @returns {any}
+     * @param config - Driver configuration
+     * @returns View adapter instance
      */
-    createEjsDriver($config: Record<string, any>) {
-        return this.adapt(new(require('./adapter/ejs'))($config['options']), $config);
+    createEjsDriver($config: Record<string, any>): ViewAdapter {
+        return this.adapt(new EjsAdapter($config['options']), $config);
     }
 
     /**
      * createPugDriver method.
      *
-     * @param {any} config
-     * @returns {any}
+     * @param config - Driver configuration
+     * @returns View adapter instance
      */
-    createPugDriver($config: Record<string, any>) {
-        return this.adapt(new(require('./adapter/pug'))($config['options']), $config);
+    createPugDriver($config: Record<string, any>): ViewAdapter {
+        return this.adapt(new PugAdapter($config['options']), $config);
     }
 
     /**
      * createNunjucksDriver method.
      *
-     * @param {any} config
-     * @returns {any}
+     * @param config - Driver configuration
+     * @returns View adapter instance
      */
-    createNunjucksDriver($config: Record<string, any>) {
-        return this.adapt(new(require('./adapter/nunjucks'))($config['options']), $config);
+    createNunjucksDriver($config: Record<string, any>): ViewAdapter {
+        return this.adapt(new NunjucksAdapter($config['options']), $config);
     }
 
     /**
      * createHandlebarDriver method.
      *
-     * @param {any} config
-     * @returns {any}
+     * @param config - Driver configuration
+     * @returns View adapter instance
      */
-    createHandlebarDriver($config: Record<string, any>) {
-        return this.adapt(new(require('./adapter/handlebar'))($config['options']), $config);
+    createHandlebarDriver($config: Record<string, any>): ViewAdapter {
+        return this.adapt(new HandlebarAdapter($config['options']), $config);
     }
 
     /**
      * adapt method.
      *
-     * @param {any} adapter
-     * @param {any} config
-     * @returns {any}
+     * @param adapter - Engine adapter instance
+     * @param config - Configuration options
+     * @returns View adapter instance
      */
-    adapt(adapter: any, config: Record<string, any>) {
+    adapt(adapter: any, config: Record<string, any>): ViewAdapter {
         return new ViewAdapter(adapter, config);
     }
 
     /**
      * getConfig method.
      *
-     * @param {any} name
-     * @returns {any}
+     * @param name - Configuration key name
+     * @returns Configuration value
      */
-    getConfig(name: string) {
+    getConfig(name: string): any {
         return super.getConfig(`engines.${name}`);
     }
 
     /**
      * getDefaultDriver method.
      *
-     * @returns {any}
+     * @returns Default driver name
      */
-    getDefaultDriver() {
+    getDefaultDriver(): string {
         return this.getDefaultEngine();
     }
 
     /**
      * getDefaultEngine method.
      *
-     * @returns {any}
+     * @returns Default engine name
      */
-    getDefaultEngine() {
+    getDefaultEngine(): string {
         return super.getConfig('default');
     }
 
 }
 
-module.exports = ViewManager
+export = ViewManager;

@@ -1,23 +1,22 @@
-const ServiceProvider = require('@ostro/support/serviceProvider');
-const ViewManager = require('./viewManager')
+import ServiceProvider from '@ostro/support/serviceProvider';
+import ViewManager from './viewManager';
+
 class ViewServiceProvider extends ServiceProvider {
 
     /**
      * register method.
-     *
-     * @returns {any}
      */
-    register() {
-        this.$app.singleton('view', function(app) {
-            return new ViewManager(app)
-        })
+    public override register(): void {
+        this.$app.singleton('view', function(app: any): ViewManager {
+            return new ViewManager(app);
+        });
     }
+
     /**
      * boot method.
-     *
-     * @returns {any}
      */
-    boot() {}
+    public override boot(): void {}
 
 }
-module.exports = ViewServiceProvider
+
+export = ViewServiceProvider;

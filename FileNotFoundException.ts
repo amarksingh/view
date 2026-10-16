@@ -1,19 +1,24 @@
-const FileNotFoundExceptionContracts = require('@ostro/contracts/view/fileNotFoundException')
+import FileNotFoundExceptionContracts from '@ostro/contracts/view/fileNotFoundException';
+
 class FileNotFoundException extends FileNotFoundExceptionContracts {
+    public error: unknown;
+    public statusCode: number;
+    public name: string;
+    public message: string;
+
     /**
      * constructor method.
      *
-     * @param {any} errors
-     * @returns {any}
+     * @param errors - Error details or message
      */
-    constructor(errors: any) {
+    constructor(errors: unknown) {
         super();
         this.name = this.constructor.name;
         this.message = 'View file not found';
-        this.error = errors
+        this.error = errors;
         this.statusCode = 404;
         Error.captureStackTrace(this, this.constructor);
-
     }
 }
-module.exports = FileNotFoundException
+
+export = FileNotFoundException;

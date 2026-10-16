@@ -1,7 +1,7 @@
-const FileNotFoundException = require('../FileNotFoundException');
-const InvalidArgumentException = require('../InvalidArgumentException');
-const ViewServiceProvider = require('../viewServiceProvider');
-const ViewManager = require('../viewManager');
+import FileNotFoundException from '../FileNotFoundException';
+import InvalidArgumentException from '../InvalidArgumentException';
+import ViewServiceProvider from '../viewServiceProvider';
+import ViewManager from '../viewManager';
 
 describe('View Exceptions & ViewServiceProvider', () => {
     test('FileNotFoundException attributes', () => {
