@@ -1,4 +1,5 @@
 class EJS {
+    $options: Record<string, any>;
     /**
      * constructor method.
      *

@@ -1,4 +1,5 @@
-class Handlebar {
+class Nunjucks {
+    public default: Record<string, any>;
     /**
      * constructor method.
      *
@@ -39,4 +40,4 @@ class Handlebar {
     }
 
 }
-export default Handlebar;
+export default Nunjucks;

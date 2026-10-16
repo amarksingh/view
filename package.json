@@ -3,7 +3,24 @@
   "version": "1.0.1",
   "description": "View module for OstroJS",
   "scripts": {
+    "build": "rm -rf build && npx tsc -p tsconfig.build.json",
+    "prepublishOnly": "npm run build",
     "test": "npx c8 npx jest"
+  },
+  "main": "build/viewManager.js",
+  "types": "build/viewManager.d.ts",
+  "files": [
+    "build"
+  ],
+  "exports": {
+    ".": {
+      "types": "./build/viewManager.d.ts",
+      "default": "./build/viewManager.js"
+    },
+    "./*": {
+      "types": "./build/*.d.ts",
+      "default": "./build/*.js"
+    }
   },
   "dependencies": {
     "@ostro/support": "^1.0.2",
@@ -20,7 +37,6 @@
   ],
   "author": "amar",
   "license": "MIT",
-  "main": "viewManager.ts",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ostrojs/view.git"

@@ -1,4 +1,5 @@
 class PUG {
+    public $options: Record<string, any>;
     /**
      * constructor method.
      *

@@ -1,4 +1,5 @@
 class Twig {
+    public $options: Record<string, any>;
     /**
      * constructor method.
      *
