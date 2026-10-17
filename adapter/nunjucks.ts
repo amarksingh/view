@@ -30,7 +30,7 @@ class Nunjucks {
      * @param {any} cb
      * @returns {any}
      */
-    render(content: any, data: Record<string, any> = {}, cb: any) {
+    public render(content: any, data: Record<string, any> = {}, cb: any) {
         const nunjucksModule = require('nunjucks');
         const nunjucks = nunjucksModule?.default || nunjucksModule;
         return nunjucks.renderString(content, data, function(err, res) {

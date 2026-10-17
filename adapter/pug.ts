@@ -17,7 +17,7 @@ class PUG {
      * @param {any} cb
      * @returns {any}
      */
-    render(content: any, data: Record<string, any> = {}, cb: any) {
+    public render(content: any, data: Record<string, any> = {}, cb: any) {
         const pugModule = require('pug');
         const pug = pugModule?.default || pugModule;
         cb(pug.compile(content, this.$options)(data))

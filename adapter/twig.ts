@@ -22,7 +22,7 @@ class Twig {
      * @param {any} cb
      * @returns {any}
      */
-    render(string: any, data: Record<string, any> = {}, cb: any) {
+    public render(string: any, data: Record<string, any> = {}, cb: any) {
         const twigModule = require('twig');
         const twig = twigModule?.default || twigModule;
         twig.twig({ data: string, ...this.$options }).renderAsync(data).then(function(res) {

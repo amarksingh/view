@@ -17,7 +17,7 @@ class Handlebar {
      * @param {any} cb
      * @returns {any}
      */
-    render(content: any, data: Record<string, any> = {}, cb: any) {
+    public render(content: any, data: Record<string, any> = {}, cb: any) {
         const hbModule = require('handlebars');
         const handlebars = hbModule?.default || hbModule;
         cb(handlebars.compile(content)(data))

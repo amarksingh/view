@@ -13,7 +13,7 @@ class ViewManager extends Manager {
     /**
      * $type property.
      */
-    $type: string = 'view';
+    public $type: string = 'view';
 
     /**
      * engine method.
@@ -21,7 +21,7 @@ class ViewManager extends Manager {
      * @param name - Engine name or null for default
      * @returns View adapter instance
      */
-    engine(name: string | null = null): ViewAdapter {
+    public engine(name: string | null = null): ViewAdapter {
         return this.driver(name) as ViewAdapter;
     }
 
@@ -31,7 +31,7 @@ class ViewManager extends Manager {
      * @param name - Engine name to resolve
      * @returns Resolved driver instance
      */
-    resolve($name: string): any {
+    public resolve($name: string): any {
         const config: Record<string, any> = this.getConfig($name);
         if (!config) {
             throw new InvalidArgumentException("Engine [{" + $name + "}] was not available.");
@@ -50,7 +50,7 @@ class ViewManager extends Manager {
      * @param config - Driver configuration
      * @returns View adapter instance
      */
-    createTwigDriver($config: Record<string, any>): ViewAdapter {
+    public createTwigDriver($config: Record<string, any>): ViewAdapter {
         return this.adapt(new TwigAdapter($config['options']), $config);
     }
 
@@ -60,7 +60,7 @@ class ViewManager extends Manager {
      * @param config - Driver configuration
      * @returns View adapter instance
      */
-    createEjsDriver($config: Record<string, any>): ViewAdapter {
+    public createEjsDriver($config: Record<string, any>): ViewAdapter {
         return this.adapt(new EjsAdapter($config['options']), $config);
     }
 
@@ -70,7 +70,7 @@ class ViewManager extends Manager {
      * @param config - Driver configuration
      * @returns View adapter instance
      */
-    createPugDriver($config: Record<string, any>): ViewAdapter {
+    public createPugDriver($config: Record<string, any>): ViewAdapter {
         return this.adapt(new PugAdapter($config['options']), $config);
     }
 
@@ -80,7 +80,7 @@ class ViewManager extends Manager {
      * @param config - Driver configuration
      * @returns View adapter instance
      */
-    createNunjucksDriver($config: Record<string, any>): ViewAdapter {
+    public createNunjucksDriver($config: Record<string, any>): ViewAdapter {
         return this.adapt(new NunjucksAdapter($config['options']), $config);
     }
 
@@ -90,7 +90,7 @@ class ViewManager extends Manager {
      * @param config - Driver configuration
      * @returns View adapter instance
      */
-    createHandlebarDriver($config: Record<string, any>): ViewAdapter {
+    public createHandlebarDriver($config: Record<string, any>): ViewAdapter {
         return this.adapt(new HandlebarAdapter($config['options']), $config);
     }
 
@@ -101,7 +101,7 @@ class ViewManager extends Manager {
      * @param config - Configuration options
      * @returns View adapter instance
      */
-    adapt(adapter: any, config: Record<string, any>): ViewAdapter {
+    public adapt(adapter: any, config: Record<string, any>): ViewAdapter {
         return new ViewAdapter(adapter, config);
     }
 
@@ -111,7 +111,7 @@ class ViewManager extends Manager {
      * @param name - Configuration key name
      * @returns Configuration value
      */
-    getConfig(name: string): any {
+    public getConfig(name: string): any {
         return super.getConfig(`engines.${name}`);
     }
 
@@ -120,7 +120,7 @@ class ViewManager extends Manager {
      *
      * @returns Default driver name
      */
-    getDefaultDriver(): string {
+    public getDefaultDriver(): string {
         return this.getDefaultEngine();
     }
 
@@ -129,7 +129,7 @@ class ViewManager extends Manager {
      *
      * @returns Default engine name
      */
-    getDefaultEngine(): string {
+    public getDefaultEngine(): string {
         return super.getConfig('default');
     }
 

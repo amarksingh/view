@@ -67,7 +67,7 @@ class ViewAdapter {
      * @param name - Configuration key name
      * @returns Configuration value or null
      */
-    getConfig(name: string): any {
+    public getConfig(name: string): any {
         return ObjectGet(this[kConfig], name, null);
     }
 
@@ -76,7 +76,7 @@ class ViewAdapter {
      *
      * @returns Root directory path
      */
-    getRootPath(): string {
+    public getRootPath(): string {
         return this[kConfig]['root'] || '';
     }
 
@@ -86,7 +86,7 @@ class ViewAdapter {
      * @param dest - Destination view path
      * @returns Full resolved path with extension
      */
-    applyPathPrefix(dest: string = ''): string {
+    public applyPathPrefix(dest: string = ''): string {
         return this.applyExtension(path.join(this.getRootPath(), dest.replace(/\./g, '/')));
     }
 
@@ -96,7 +96,7 @@ class ViewAdapter {
      * @param path - File path without extension
      * @returns File path with extension appended
      */
-    applyExtension(path: string = ''): string {
+    public applyExtension(path: string = ''): string {
         return path + '.' + (this.getConfig('extension') || this.getConfig('engine'));
     }
 

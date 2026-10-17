@@ -1,5 +1,5 @@
 class EJS {
-    $options: Record<string, any>;
+    public $options: Record<string, any>;
     /**
      * constructor method.
      *
@@ -17,7 +17,7 @@ class EJS {
      * @param {any} cb
      * @returns {any}
      */
-    render(content: any, data: Record<string, any> = {}, cb: any) {
+    public render(content: any, data: Record<string, any> = {}, cb: any) {
         const ejsModule = require('ejs');
         const ejs = ejsModule?.default || ejsModule;
         cb(ejs.render(content, data, this.$options))
