@@ -4,10 +4,10 @@ jest.mock('nunjucks', () => ({ configure: jest.fn(), renderString: jest.fn() }),
 jest.mock('pug', () => ({ compile: jest.fn() }), { virtual: true });
 jest.mock('twig', () => ({ cache: jest.fn(), twig: jest.fn() }), { virtual: true });
 
-import FileNotFoundException from '../FileNotFoundException';
-import InvalidArgumentException from '../InvalidArgumentException';
-import ViewServiceProvider from '../viewServiceProvider';
-import ViewManager from '../viewManager';
+import FileNotFoundException from '../src/FileNotFoundException';
+import InvalidArgumentException from '../src/InvalidArgumentException';
+import ViewServiceProvider from '../src/viewServiceProvider';
+import ViewManager from '../src/viewManager';
 
 describe('View Exceptions & ViewServiceProvider', () => {
     test('FileNotFoundException attributes', () => {

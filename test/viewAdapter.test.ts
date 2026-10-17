@@ -1,6 +1,6 @@
 const path = require('path');
 const fs = require('fs');
-const _ViewAdapter = require('../viewAdapter');
+const _ViewAdapter = require('../src/viewAdapter');
 const ViewAdapter = _ViewAdapter.default || _ViewAdapter;
 
 describe('ViewAdapter', () => {

@@ -23,6 +23,7 @@
     }
   },
   "dependencies": {
+    "@ostro/contracts": "^2.0.0-alpha.1",
     "@ostro/support": "^2.0.0-alpha.1",
     "bluebird": "^3.7.2",
     "lodash.get": "^4.4.2"
@@ -46,7 +47,7 @@
   },
   "homepage": "https://github.com/ostrojs/view#readme",
   "devDependencies": {
-    "typescript": "^5.8.0",
-    "@types/node": "^22.0.0"
+    "@types/node": "^22.20.5",
+    "typescript": "^5.8.0"
   }
 }

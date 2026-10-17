@@ -34,19 +34,19 @@ jest.mock('nunjucks', () => mockNunjucks, { virtual: true });
 jest.mock('pug', () => mockPug, { virtual: true });
 jest.mock('twig', () => mockTwig, { virtual: true });
 
-const _EJSAdapter = require('../adapter/ejs');
+const _EJSAdapter = require('../src/adapter/ejs');
 const EJSAdapter = _EJSAdapter.default || _EJSAdapter;
-const _HandlebarAdapter = require('../adapter/handlebar');
+const _HandlebarAdapter = require('../src/adapter/handlebar');
 const HandlebarAdapter = _HandlebarAdapter.default || _HandlebarAdapter;
-const _NunjucksAdapter = require('../adapter/nunjucks');
+const _NunjucksAdapter = require('../src/adapter/nunjucks');
 const NunjucksAdapter = _NunjucksAdapter.default || _NunjucksAdapter;
-const _PugAdapter = require('../adapter/pug');
+const _PugAdapter = require('../src/adapter/pug');
 const PugAdapter = _PugAdapter.default || _PugAdapter;
-const _TwigAdapter = require('../adapter/twig');
+const _TwigAdapter = require('../src/adapter/twig');
 const TwigAdapter = _TwigAdapter.default || _TwigAdapter;
-const _ViewManager = require('../viewManager');
+const _ViewManager = require('../src/viewManager');
 const ViewManager = _ViewManager.default || _ViewManager;
-const _InvalidArgumentException = require('../InvalidArgumentException');
+const _InvalidArgumentException = require('../src/InvalidArgumentException');
 const InvalidArgumentException = _InvalidArgumentException.default || _InvalidArgumentException;
 
 describe('Adapters & ViewManager', () => {
